@@ -555,7 +555,7 @@ function tokenizer(input) {
 function parser(tokens) {
 
   // Again we keep a `current` variable that we will use as a cursor.
-  let current = 0;
+  let current = 0; // always points to next token at the beginning of walk()
 
   // But this time we're going to use recursion instead of a `while` loop. So we
   // define a `walk` function.
@@ -657,7 +657,9 @@ function parser(tokens) {
         // push it into our `node.params`.
         node.params.push(walk());
         token = tokens[current];
-      }
+      } // similar to the outermost layer of the BST - 'Program'. So we can just
+      // treat each func call as a 'Program' with scope contained in the
+      // parenthesis
 
       // Finally we will increment `current` one last time to skip the closing
       // parenthesis.
